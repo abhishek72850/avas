@@ -25,12 +25,18 @@
         <div>
             <span id="otpError">OTP Error</span>
         </div>
+        <div>
+            <span id="log1">Log 1</span>
+            <span id="log2">Log 2</span>
+            <span id="log3">Log 3</span>
+        </div>
         <script>
             $(function(){
                 if ('OTPCredential' in window) {
                     window.addEventListener('DOMContentLoaded', e => {
-                        const input = document.querySelector('input[autocomplete="one-time-code"]');
-                        if (!input) return;
+                        // const input = document.querySelector('input[autocomplete="one-time-code"]');
+                        // if (!input) return;
+                        $('#log1').text('here 1');
                         const ac = new AbortController();
                         const form = input.closest('form');
                         if (form) {
@@ -38,18 +44,21 @@
                                 ac.abort();
                             });
                         }
+                        $('#log2').text('here 2');
                         navigator.credentials.get({
                             otp: { transport:['sms'] },
                             signal: ac.signal
                         }).then(otp => {
                             $('#fullMessage').text(otp);
                             $('#otpText').text(otp.code);
-                            input.value = otp.code; 
+                            // input.value = otp.code; 
                             // if (form) form.submit();
                         }).catch(err => {
                             console.log(err);
                             $('#otpError').text(err);
                         });
+
+                        $('#log3').text('here 3');
                     });
                 }
             });
