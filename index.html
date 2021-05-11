@@ -38,12 +38,12 @@
                     // if (!input) return;
                     $('#log1').text('here 1');
                     const ac = new AbortController();
-                    const form = input.closest('form');
-                    if (form) {
-                        form.addEventListener('submit', e => {
-                            ac.abort();
-                        });
-                    }
+                    // const form = input.closest('form');
+                    // if (form) {
+                    //     form.addEventListener('submit', e => {
+                    //         ac.abort();
+                    //     });
+                    // }
                     $('#log2').text('here 2');
                     navigator.credentials.get({
                         otp: { transport:['sms'] },
