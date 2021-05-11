@@ -22,6 +22,9 @@
         <div>
             <span id="otpText">OTP text</span>
         </div>
+        <div>
+            <span id="otpError">OTP Error</span>
+        </div>
         <script>
             $(function(){
                 if ('OTPCredential' in window) {
@@ -41,10 +44,11 @@
                         }).then(otp => {
                             $('#fullMessage').text(otp);
                             $('#otpText').text(otp.code);
-                            input.value = otp.code;
-                            if (form) form.submit();
+                            input.value = otp.code; 
+                            // if (form) form.submit();
                         }).catch(err => {
                             console.log(err);
+                            $('#otpError').text(err);
                         });
                     });
                 }
