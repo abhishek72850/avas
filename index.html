@@ -33,33 +33,33 @@
         <script>
             $(function(){
                 if ('OTPCredential' in window) {
-                    window.addEventListener('DOMContentLoaded', e => {
-                        // const input = document.querySelector('input[autocomplete="one-time-code"]');
-                        // if (!input) return;
-                        $('#log1').text('here 1');
-                        const ac = new AbortController();
-                        const form = input.closest('form');
-                        if (form) {
-                            form.addEventListener('submit', e => {
-                                ac.abort();
-                            });
-                        }
-                        $('#log2').text('here 2');
-                        navigator.credentials.get({
-                            otp: { transport:['sms'] },
-                            signal: ac.signal
-                        }).then(otp => {
-                            $('#fullMessage').text(otp);
-                            $('#otpText').text(otp.code);
-                            // input.value = otp.code; 
-                            // if (form) form.submit();
-                        }).catch(err => {
-                            console.log(err);
-                            $('#otpError').text(err);
+                    // window.addEventListener('DOMContentLoaded', e => {
+                    // const input = document.querySelector('input[autocomplete="one-time-code"]');
+                    // if (!input) return;
+                    $('#log1').text('here 1');
+                    const ac = new AbortController();
+                    const form = input.closest('form');
+                    if (form) {
+                        form.addEventListener('submit', e => {
+                            ac.abort();
                         });
-
-                        $('#log3').text('here 3');
+                    }
+                    $('#log2').text('here 2');
+                    navigator.credentials.get({
+                        otp: { transport:['sms'] },
+                        signal: ac.signal
+                    }).then(otp => {
+                        $('#fullMessage').text(otp);
+                        $('#otpText').text(otp.code);
+                        // input.value = otp.code; 
+                        // if (form) form.submit();
+                    }).catch(err => {
+                        console.log(err);
+                        $('#otpError').text(err);
                     });
+
+                    $('#log3').text('here 3');
+                    // });
                 }
             });
         </script>
