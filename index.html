@@ -12,7 +12,14 @@
         <div style="border:1px solid; padding: 5px; 10px; margin: 10px 0;">
             <form action="/post" method="post">
               Enter OTP here:
-              <input type="text" autocomplete="one-time-code" inputmode="numeric" name="one-time-code">
+              <input type="text"
+                 inputmode="numeric"
+                 is="web-otp"
+                 id="otp-input"
+                 class="mdc-text-field__input"
+                 autocomplete="one-time-code"
+                 pattern="^([0-9]+)$"
+                 required/>
               <input type="submit" value="Submit">
             </form>
         </div>
@@ -33,33 +40,33 @@
         <script>
             $(function(){
                 if ('OTPCredential' in window) {
-                    // window.addEventListener('DOMContentLoaded', e => {
-                    // const input = document.querySelector('input[autocomplete="one-time-code"]');
-                    // if (!input) return;
-                    $('#log1').text('here 1');
-                    const ac = new AbortController();
-                    // const form = input.closest('form');
-                    // if (form) {
-                    //     form.addEventListener('submit', e => {
-                    //         ac.abort();
-                    //     });
-                    // }
-                    $('#log2').text('here 2');
-                    navigator.credentials.get({
-                        otp: { transport:['sms'] },
-                        signal: ac.signal
-                    }).then(otp => {
-                        $('#fullMessage').text(otp);
-                        $('#otpText').text(otp.code);
-                        // input.value = otp.code; 
-                        // if (form) form.submit();
-                    }).catch(err => {
-                        console.log(err);
-                        $('#otpError').text(err);
-                    });
+                    window.addEventListener('DOMContentLoaded', e => {
+                        // const input = document.querySelector('input[autocomplete="one-time-code"]');
+                        // if (!input) return;
+                        $('#log1').text('here 1');
+                        const ac = new AbortController();
+                        // const form = input.closest('form');
+                        // if (form) {
+                        //     form.addEventListener('submit', e => {
+                        //         ac.abort();
+                        //     });
+                        // }
+                        $('#log2').text('here 2');
+                        navigator.credentials.get({
+                            otp: { transport:['sms'] },
+                            signal: ac.signal
+                        }).then(otp => {
+                            $('#fullMessage').text(otp);
+                            $('#otpText').text(otp.code);
+                            // input.value = otp.code; 
+                            // if (form) form.submit();
+                        }).catch(err => {
+                            console.log(err);
+                            $('#otpError').text(err);
+                        });
 
-                    $('#log3').text('here 3');
-                    // });
+                        $('#log3').text('here 3');
+                    });
                 }
             });
         </script>
