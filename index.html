@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>AVAS</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>div {font-family: sans-serif;}</style>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+      </head>
+    <body>
+        <div style="border:1px solid; padding: 5px; 10px; margin: 10px 0;">
+            <form action="/post" method="post">
+              Enter OTP here:
+              <input type="text" autocomplete="one-time-code" inputmode="numeric" name="one-time-code">
+              <input type="submit" value="Submit">
+            </form>
+        </div>
+        <div>
+            <span id="fullMessage">Full Message</span>
+        </div>
+        <div>
+            <span id="otpText">OTP text</span>
+        </div>
+        <script>
+            $(function(){
+                if ('OTPCredential' in window) {
+                    window.addEventListener('DOMContentLoaded', e => {
+                        const input = document.querySelector('input[autocomplete="one-time-code"]');
+                        if (!input) return;
+                        const ac = new AbortController();
+                        const form = input.closest('form');
+                        if (form) {
+                            form.addEventListener('submit', e => {
+                                ac.abort();
+                            });
+                        }
+                        navigator.credentials.get({
+                            otp: { transport:['sms'] },
+                            signal: ac.signal
+                        }).then(otp => {
+                            $('#fullMessage').text(otp);
+                            $('#otpText').text(otp.code);
+                            input.value = otp.code;
+                            if (form) form.submit();
+                        }).catch(err => {
+                            console.log(err);
+                        });
+                    });
+                }
+            });
+        </script>
+    </body>
+</html>
