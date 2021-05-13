@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 import json
 import requests
+import http.client
 from datetime import datetime
 
 app = Flask(__name__)
@@ -55,24 +56,39 @@ def vaccine_notifier():
          }
     ]
 
-    cowin_api = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByPin?pincode={}&date={}"
+    conn = http.client.HTTPSConnection("cdn-api.co-vin.in")
+
+    cowin_api = "/api/v2/appointment/sessions/public/calendarByPin?pincode={}&date={}"
 
     for user in user_base:
         todays_date = datetime.now().strftime("%d-%m-%Y")
         format_cowin_api = cowin_api.format(user["pincode"], todays_date)
 
-        payload={}
+        payload = ''
         headers = {
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:86.0) Gecko/20100101 Firefox/86.0',
+            'Content-Type': 'application/json'
         }
-        response = requests.request("GET", format_cowin_api, headers=headers, data=payload)
 
-        print('CoWin Response:', response.status_code)
+        # payload={}
+        # headers = {
+        # 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:86.0) Gecko/20100101 Firefox/86.0',
+        # }
+        # # response = requests.request("GET", format_cowin_api, headers=headers, data=payload)
 
-        try:
-            data = response.json()
-        except Exception as e:
+        conn.request("GET", format_cowin_api, payload, headers)
+        res = conn.getresponse()
+
+        print('CoWin Response:', res.status)
+
+        if (res.status == 200):
+            data = json.loads(res.read().decode("utf-8"))
+        else:
             continue
+
+        # try:
+        #     data = response.json()
+        # except Exception as e:
+        #     continue
 
         availability = get_vaccine_availabilities(data, user)
         if (availability):
