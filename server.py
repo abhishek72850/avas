@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 import json
 import requests
 import http.client
@@ -7,6 +7,11 @@ from datetime import datetime
 app = Flask(__name__)
 
 # A welcome message to test our server
+
+@app.route('/home')
+def home():
+   return render_template('index.html')
+
 @app.route('/')
 def index():
     payload = {}
