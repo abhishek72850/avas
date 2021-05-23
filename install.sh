@@ -1,3 +1,4 @@
+pkg up
 pkg install termux-api
 
 termux-setup-storage
