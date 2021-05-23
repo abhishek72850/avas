@@ -5,6 +5,19 @@ This is python script which can notifiy vaccine availability in your given pinco
 
 > Note: This will work online when used in Android Phones, although this can be used in ios if there's an alternative for Termux app on ios to use python
 
+Algorithm overview:
+```
+        1. If token expired goto 2 else 3
+        2. Login
+            a. Send OTP
+            b. fetch message extract OTP
+            c. Verify OTP get token
+        3. gets vaccine availability
+        4. gets beneficiary
+        5. solves captcha
+        6. schedule appointment
+```
+
 ## How to use?
 To use this script follow the below steps:
 
