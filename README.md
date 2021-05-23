@@ -3,7 +3,7 @@ Automated Vaccine Appointment Schedular
 
 This is python script which can notifiy vaccine availability in your given pincode/district and also automatically schedules the appointment for vaccination.
 
-`Note: This will work online when used in Android Phones`
+> Note: This will work online when used in Android Phones, although this can be used in ios if there's an alternative for Termux app on ios to use python
 
 ## How to use?
 To use this script follow the below steps:
