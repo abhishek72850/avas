@@ -1,0 +1,95 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+html, body{
+  width: 100%;
+  height: 100%;
+}
+
+.parent_container{
+  background-color: #001f60;
+  background-image: url('https://prod-cdn.preprod.co-vin.in/assets/images/Vectorbg.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: 50% 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+#search_form{
+  border: 1px solid #000;
+  width: 70%;
+  box-shadow: 0 0 5px rgba(0,0,0,0.5)
+}
+
+.search_panel{
+  height: 5em;
+}
+
+.select_panel{
+  height: 7em;
+  background-color: #fdbc00;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.select_container{
+  width: 50%;
+  height: 100%;
+  padding: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#states_select-button, #district_select-button{
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: center;
+}
+
+.result_panel{
+  background-color: #eee; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.result_panel>span{
+  font-size: 1.5em;
+}
+
+.ui-dialog-titlebar {
+  display: none;
+}
+
+#dialog{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#dialog>span{
+  
+}
+
+@media only screen and (max-width: 400px){
+  .select_panel{
+    height: 10em;
+    flex-direction: column;
+  }
+  .select_container{
+    width: 100%;
+  }
+}

@@ -4,38 +4,36 @@
         <title>AVAS</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-      </head>
-    <body>
-        <span id="response_a"></span>
-        <span id="response_b"></span>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <link rel="stylesheet" href="app.css">
+
         <script>
-            $(function(){
-                var url_a = "https://cdn-api.co-vin.in/api/v2/admin/location/states"
-                var url_b = "https://cdn-api.co-vin.in/api/v2/admin/location/districts/21"
-
-                $.ajax({
-                    url: url_a,
-                    method: "GET",
-                    data: {}
-                }).done(function( data ) {
-                    $( "#response_a" ).text(data);
-                }).fail(function( jqXHR, textStatus ) {
-                    $( "#response_a" ).text( "Request failed: " + textStatus );
-                });
-
-                $.ajax({
-                    url: url_b,
-                    method: "GET",
-                    data: {}
-                }).done(function( data ) {
-                    $( "#response_b" ).text(data);
-                }).fail(function( jqXHR, textStatus ) {
-                    $( "#response_b" ).text( "Request failed: " + textStatus );
-                });
-
-                
-            });
+            
         </script>
+    </head>
+    <body>
+        <div class="parent_container">
+            <form action="#" id="search_form">
+                <div class="search_panel select_panel">
+                    <div class="select_container">
+                        <select id="states_select">
+                            <option value="">Select State</option>
+                        </select>
+                    </div>
+                    <div class="select_container">
+                        <select id="district_select"></select>
+                    </div>
+                </div>
+                <div class="search_panel result_panel">
+                    <span id="district_id_result"></span>
+                </div>
+            </form>
+        </div>
+
+        <div id='dialog'><span>Loading...</span></div>
+
+        <script src="app.js"></script>
     </body>
 </html>
