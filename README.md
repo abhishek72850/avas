@@ -45,5 +45,6 @@ To use this script follow the below steps:
 
 6. On Termux cd to the path where you have downloaded the files
 7. Run the command to install dependencies: `bash install.sh`
-8. Open the Airmore application and keep it running in background  
-9. Run the command on Termux: `python avas.py`
+8. Open the Airmore application, click on the 3 dot icon Get IP and copy the IP ADDRESS only, then keep the app running in background
+9. Now open the `prod.env` file paster the IP in the `AIRMORE_IP_ADDRESS` value and fill out the API keys for Twilio and Anti-Captcha.
+10. Run the command on Termux: `python avas.py prod.env`
