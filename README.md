@@ -14,7 +14,7 @@ Algorithm overview:
             c. Verify OTP get token
         3. gets vaccine availability
         4. gets beneficiary
-        5. solves captcha
+        5. get and solve captcha
         6. schedule appointment
 ```
 
