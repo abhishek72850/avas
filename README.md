@@ -36,7 +36,7 @@ To use this script follow the below steps:
 * `mobile` : Provide mobile number on which you to sent vaccine availability sms at the given pincode or district center's
 * `email` : Provide any email (It doesn't send any emails right now)
 * `pincode` : Provide pincode if `search_by` value is `pincode` otherwise remove this key
-* `district_id` : Provide district_id if `search_by` value is `district` otherwise remove this key
+* `district_id` : Provide district_id if `search_by` value is `district` otherwise remove this key (Get the district_id from here: https://avas.herokuapp.com/)
 * `min_age` : Takes minimum age limit for which vaccine should be searched, it takes either `18` or `45`
 * `max_age` : Provide any value (This is not used as of now)
 * `dose` : Provide `1` if registering for first dose else provide `2` if registering for second dose
