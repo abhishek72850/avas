@@ -45,7 +45,7 @@ To use this script follow the below steps:
 ```
 * `search_by` : Takes by how you want to search for vaccine availability it can be either `pincode` or `district`
 * `beneficiary_reference_id` : Provide beneficiary ref id, you can get this by logging in CoWin portal
-* `login_mobile` : Provide mobile number through which you will registering the given `beneficiary_reference_id`
+* `login_mobile` : Provide mobile number through which you will registering the given `beneficiary_reference_id`, (`given beneficiary reference id should be added under this account registered using the mobile number present in login_mobile`)
 * `mobile` : Provide mobile number on which you to sent vaccine availability sms at the given pincode or district center's
 * `email` : Provide any email (It doesn't send any emails right now)
 * `pincode` : Provide pincode if `search_by` value is `pincode` otherwise remove this key
