@@ -1,3 +1,5 @@
+beautifulsoup4==4.9.3
+bs4==0.0.1
 captcha-solver==0.1.5
 certifi==2020.12.5
 chardet==4.0.0
@@ -12,6 +14,7 @@ python-dotenv==0.17.1
 reportlab==3.5.67
 requests==2.25.1
 six==1.16.0
+soupsieve==2.2.1
 svglib==1.1.0
 tinycss2==1.1.0
 urllib3==1.26.4
