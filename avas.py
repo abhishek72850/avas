@@ -441,7 +441,7 @@ class AVAS(Utitlity):
                 if (not self.is_token_valid(self.cowin_token)):
                     self.cowin_token = self.cowin_login(user)
                 
-                if (cowin_token is None):
+                if (self.cowin_token is None):
                     print('Login failed, skipping...')
                     continue
                 
