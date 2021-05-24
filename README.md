@@ -21,28 +21,34 @@ Algorithm overview:
 ## How to use?
 To use this script follow the below steps:
 
+### Installing APPs
 1. Install Airmore application from Google play store (<a href='https://play.google.com/store/apps/details?id=com.airmore'>Click here</a>)
 2. Install Termux application from Google play store (<a href='https://play.google.com/store/apps/details?id=com.termux'>Click here</a>)
-3. Install Python 3.x in Termux from <a href='https://wiki.termux.com/wiki/Python'>here</a>
-4. Download all the AVAS files and copy into the phone internal storage
-5. Edit the `users.json` and enter the details of the user for which you want schedule and notify for vaccine availability.
+
+### Clone Repository
+3. Run below command on Termux to install git and clone repository
+    ```
+    pkg up && pkg install git && git clone https://github.com/abhishek72850/avas
+    ```
+### Add user details    
+4. Open `users.json` on any editor and enter the details of the user for which you want schedule and notify for vaccine availability.
 * Sample User:
-```json
-[
-  {
-    "search_by": "pincode",
-    "beneficiary_reference_id": "72255782401234",
-    "login_mobile": "1234567890",
-    "mobile": "1234567890",
-    "email": "email@gmail.com",
-    "pincode": "800001",
-    "district_id": "312",
-    "min_age": "18",
-    "max_age": "44",
-    "dose": 1
-  }
-]
-```
+    ```json
+    [
+      {
+        "search_by": "pincode",
+        "beneficiary_reference_id": "72255782401234",
+        "login_mobile": "1234567890",
+        "mobile": "1234567890",
+        "email": "email@gmail.com",
+        "pincode": "800001",
+        "district_id": "312",
+        "min_age": "18",
+        "max_age": "44",
+        "dose": 1
+      }
+    ]
+    ```
 * `search_by` : Takes by how you want to search for vaccine availability it can be either `pincode` or `district`
 * `beneficiary_reference_id` : Provide beneficiary ref id, you can get this by logging in CoWin portal
 * `login_mobile` : Provide mobile number through which you will registering the given `beneficiary_reference_id`
@@ -57,8 +63,22 @@ To use this script follow the below steps:
 
 > Note: Whichever mobile number is provided in `login_mobile` the script should be run on that phone only and it should be same in every user entry.
 
-6. On Termux cd to the path where you have downloaded the files
-7. Run the command to install dependencies: `bash install.sh`
-8. Open the Airmore application, click on the 3 dot icon Get IP and copy the IP ADDRESS only, then keep the app running in background
-9. Now open the `prod.env` file paste the IP in the `AIRMORE_IP_ADDRESS` value and fill out the API keys for Twilio SMS (https://www.twilio.com/sms) and Anti-Captcha (https://anti-captcha.com/).
-10. Run the command on Termux: `python avas.py prod.env`
+### Environment Variable file setup
+5. Open the Airmore application, click on the 3 dot icon Get IP and copy the IP ADDRESS only and keep the app running in background
+6. Open the `prod.env` on any editor then:
+    - Paste the IP in the `AIRMORE_IP_ADDRESS` value
+    - Fill out the API keys for Twilio SMS (https://www.twilio.com/sms). (**If you don't have or want Twilio skip this step**)
+
+### Execute Program
+8. On Termux cd to the path where you have cloned the repo
+9. Run the command to install dependencies:
+    ```
+    bash install.sh
+    ```
+10. Run this command to exceute scheduler:
+    (Note: If you don't have Twilio API keys, give the `-skip_notify` value `True`)
+    ```
+    python avas.py -env prod.env -skip_notify False
+    ```
+    - `-env`: Provide the environment file
+    - `-skip_notify`: Specifies when to send vaccine availability sms or not
