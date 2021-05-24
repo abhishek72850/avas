@@ -20,6 +20,7 @@ import base64
 import json
 import requests
 import html
+import argparse
 from time import sleep
 from datetime import datetime, timedelta
 
@@ -30,6 +31,8 @@ from sys import exit
 import jwt
 
 from dotenv import dotenv_values
+
+from bs4 import BeautifulSoup
 
 from svglib.svglib import svg2rlg
 from reportlab.graphics import renderPDF, renderPM
@@ -83,7 +86,8 @@ class Utitlity:
 
 
 class AVAS(Utitlity):
-    def __init__(self, env):
+    def __init__(self, env, skip_notify):
+        self.skip_notify = skip_notify
         self.cowin_token = None
         self.config = dotenv_values(env)
         self.load_records_json()
@@ -121,10 +125,30 @@ class AVAS(Utitlity):
 
         return response.status_code
     
-    def solve_captcha(self, filename='captcha.png'):
-        solver = CaptchaSolver('antigate', api_key=self.config['ANTI_CAPTCHA_API_KEY'])
-        raw_data = open(filename, 'rb').read()
-        captcha_text = solver.solve_captcha(raw_data)
+    # def solve_captcha(self, filename='captcha.png'):
+    #     solver = CaptchaSolver('antigate', api_key=self.config['ANTI_CAPTCHA_API_KEY'])
+    #     raw_data = open(filename, 'rb').read()
+    #     captcha_text = solver.solve_captcha(raw_data)
+    #     return captcha_text
+    def solve_captcha(self, captcha_svg):
+        soup = BeautifulSoup(captcha_svg,'html.parser')
+
+        model = json.loads(base64.b64decode(model.encode('ascii')))
+        captcha = {}
+
+        for path in soup.find_all('path',{'fill' : re.compile("#")}):
+            encoded_string = path.get('d').upper()
+            index = re.findall('M(\d+)',encoded_string)[0]
+            encoded_string = re.findall("([A-Z])", encoded_string)
+            encoded_string = "".join(encoded_string)
+            captcha[int(index)] =  self.config['CAPTCHA_MODEL'].get(encoded_string)
+
+        captcha = sorted(captcha.items())
+        captcha_text = ''
+
+        for char in captcha:
+            captcha_text += char[1]
+
         return captcha_text
     
     def send_otp(self, phone):
@@ -289,10 +313,10 @@ class AVAS(Utitlity):
         for beneficiary in beneficiaries['beneficiaries']:
             if (beneficiary["beneficiary_reference_id"] == user["beneficiary_reference_id"]):
                 captcha_svg_text = self.generate_captch()
-                captcha_svg = self.unescape_svg(captcha_svg_text)
-                self.save_captcha_svg(captcha_svg)
-                self.svg_to_png()
-                captcha_text = solve_captcha()
+                # captcha_svg = self.unescape_svg(captcha_svg_text)
+                # self.save_captcha_svg(captcha_svg)
+                # self.svg_to_png()
+                captcha_text = self.solve_captcha(captcha_svg_text)
                 print('Solved Captcha Text:', captcha_text)
 
                 for appointment in beneficiary['appointments']:
@@ -426,10 +450,11 @@ class AVAS(Utitlity):
                 if (data is not None):
                     availabilities = self.extract_availabilities(data, user)
                     if (len(availabilities) > 0):
-                        filtered_availabilities = self.filter_sent_availability(user, availabilities)
+                        if (not self.skip_notify):
+                            filtered_availabilities = self.filter_sent_availability(user, availabilities)
 
-                        if (len(filtered_availabilities) > 0):
-                            self.send_availability(user, filtered_availabilities)
+                            if (len(filtered_availabilities) > 0):
+                                self.send_availability(user, filtered_availabilities)
 
                         if (not self.is_beneficiary_registered(user)):
                             self.do_schedule_appointment(user, availabilities)
@@ -438,7 +463,26 @@ class AVAS(Utitlity):
             self.update_records()
             sleep(5)
 
+def get_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '-env',
+        type=str,
+        nargs='?',
+        default='prod.env',
+        help='Environment variable file name'
+    )
+    parser.add_argument(
+        '-skip_notify',
+        type=bool,
+        nargs='?',
+        default=False,
+        choices=[True, False],
+        help='If given True it will not send vaccine availability sms'
+    )
+    return parser.parse_args()
 
 if __name__ == '__main__':
     print('Version: 1.1')
-    AVAS(sys.argv[1]).start()
+    args = get_args()
+    AVAS(args.env, args.skip_notify).start()
