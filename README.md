@@ -5,7 +5,14 @@ This is python script which can notifiy vaccine availability in your given pinco
 
 > Note: This will work online when used in Android Phones, although this can be used in ios if there's an alternative for Termux app on ios to use python
 
-Algorithm overview:
+## Features
+- Schedules Vaccine Appointment Automatically
+- Supports booking of slots for multiple person
+- Sends Vaccine Availability SMS using Twilio
+- Supports vaccine search by pincode or district
+- Can notify multiple persons at once
+
+### Algorithm overview:
 ```
         1. If token expired goto 2 else 3
         2. Login
