@@ -77,12 +77,12 @@ To use this script follow the below steps:
     - Fill out the API keys for Twilio SMS (https://www.twilio.com/sms). (**If you don't have or want Twilio skip this step**)
 
 ### Execute Program
-8. On Termux cd to the path where you have cloned the repo
-9. Run the command to install dependencies:
+7. On Termux cd to the path where you have cloned the repo
+8. Run the command to install dependencies:
     ```
     bash install.sh
     ```
-10. Run this command to exceute scheduler:
+9. Run this command to exceute scheduler:
     (Note: If you don't have Twilio API keys, give the `-skip_notify` value `True`)
     ```
     python avas.py -env prod.env -skip_notify False
