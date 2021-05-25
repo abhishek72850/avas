@@ -1,3 +1,10 @@
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+
+-----------------------------
+
 # AVAS
 Automated Vaccine Appointment Schedular
 
@@ -91,3 +98,12 @@ To use this script follow the below steps:
     ```
     - `-env`: Provide the environment file
     - `-skip_notify`: Specifies when to send vaccine availability sms or not
+
+[contributors-shield]: https://img.shields.io/github/contributors/abhishek72850/avas.svg?style=for-the-badge
+[contributors-url]: https://github.com/abhishek72850/avas/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/abhishek72850/avas.svg?style=for-the-badge
+[forks-url]: https://github.com/abhishek72850/avas/network/members
+[stars-shield]: https://img.shields.io/github/stars/abhishek72850/avas.svg?style=for-the-badge
+[stars-url]: https://github.com/abhishek72850/avas/stargazers
+[issues-shield]: https://img.shields.io/github/issues/abhishek72850/avas.svg?style=for-the-badge
+[issues-url]: https://github.com/abhishek72850/avas/issues
