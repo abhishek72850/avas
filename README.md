@@ -35,7 +35,7 @@ To use this script follow the below steps:
 ### Clone Repository
 3. Run below command on Termux to install git and clone repository
     ```
-    pkg up && pkg install git && git clone https://github.com/abhishek72850/avas
+    pkg up && pkg install git && git clone https://github.com/abhishek72850/avas.git
     ```
 ### Add user details    
 4. Open `users.json` on any editor and enter the details of the user for which you want schedule and notify for vaccine availability.
