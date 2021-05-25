@@ -1,6 +1,8 @@
 # AVAS
 Automated Vaccine Appointment Schedular
 
+For faster reply to queries join <a href='t.me/avas_channel'>Telegram</a> Group.
+
 This is python script which can notifiy vaccine availability in your given pincode/district and also automatically schedules the appointment for vaccination.
 
 > Note: This will work online when used in Android Phones, although this can be used in ios if there's an alternative for Termux app on ios to use python
