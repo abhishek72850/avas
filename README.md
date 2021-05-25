@@ -1,7 +1,7 @@
 # AVAS
 Automated Vaccine Appointment Schedular
 
-For faster reply to queries join <a href='t.me/avas_channel'>Telegram</a> Group.
+For faster reply to queries join <a href='https://t.me/avas_channel'>Telegram</a> Group.
 
 This is python script which can notifiy vaccine availability in your given pincode/district and also automatically schedules the appointment for vaccination.
 
