@@ -20,4 +20,4 @@ pkg install clang
 pkg install libxml2 libxslt
 pip install cython
 
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
