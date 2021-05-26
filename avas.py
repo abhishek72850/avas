@@ -93,8 +93,9 @@ class AVAS(Utitlity):
         self.cowin_token = None
         self.config = dotenv_values(env)
         self.load_records_json()
-        self.set_airmore_session()
-        self.set_messaging_service()
+        if (not self.manual_otp):
+            self.set_airmore_session()
+            self.set_messaging_service()
     
     def set_airmore_session(self):
         ip = IPv4Address(self.config['AIRMORE_IP_ADDRESS'])
