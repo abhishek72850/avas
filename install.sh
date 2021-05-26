@@ -1,3 +1,5 @@
+#!/bin/bash
+
 pkg up
 
 pkg install python
