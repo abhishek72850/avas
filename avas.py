@@ -86,8 +86,10 @@ class Utitlity:
 
 
 class AVAS(Utitlity):
-    def __init__(self, env, skip_notify):
+    def __init__(self, env, skip_notify, manual_otp, interval):
         self.skip_notify = skip_notify
+        self.manual_otp = manual_otp
+        self.interval = interval
         self.cowin_token = None
         self.config = dotenv_values(env)
         self.load_records_json()
@@ -283,14 +285,17 @@ class AVAS(Utitlity):
 
         if (txn_id):
             otp = None
-            # Check for SMS upto 200 sec
-            for i in range(200):
-                messages = self.get_sms_history(self.service)
-                message = self.get_cowin_sms(messages, otp_sent_at)
-                if (message):
-                    otp = self.extract_otp(message)
-                    break
-                sleep(1)
+            if (self.manual_otp):
+                # Check for SMS upto 200 sec
+                for i in range(200):
+                    messages = self.get_sms_history(self.service)
+                    message = self.get_cowin_sms(messages, otp_sent_at)
+                    if (message):
+                        otp = self.extract_otp(message)
+                        break
+                    sleep(1)
+            else:
+                otp = input('Enter OTP: ')
             
             if (otp):
                 token = self.verify_otp_and_get_token(otp, txn_id)
@@ -449,6 +454,8 @@ class AVAS(Utitlity):
 
                 if (data is not None):
                     availabilities = self.extract_availabilities(data, user)
+                    print('Found availabilities: {}'.format(len(availabilities)))
+
                     if (len(availabilities) > 0):
                         if (not self.skip_notify):
                             filtered_availabilities = self.filter_sent_availability(user, availabilities)
@@ -461,7 +468,7 @@ class AVAS(Utitlity):
                         else:
                             print('Beneficiary:{} with phone:{} already registered for dose:{}'.format(user['beneficiary_reference_id'],user['mobile'], user['dose']))
             self.update_records()
-            sleep(5)
+            sleep(self.interval)
 
 def get_args():
     parser = argparse.ArgumentParser()
@@ -480,9 +487,24 @@ def get_args():
         choices=[True, False],
         help='If given True it will not send vaccine availability sms'
     )
+    parser.add_argument(
+        '-manual_otp',
+        type=bool,
+        nargs='?',
+        default=False,
+        choices=[True, False],
+        help='Whether to enter OTP manually or extract automatically'
+    )
+    parser.add_argument(
+        '-interval',
+        type=int,
+        nargs='?',
+        default=30,
+        help='Time interval in seconds between each check(default: 30sec)'
+    )
     return parser.parse_args()
 
 if __name__ == '__main__':
     print('Version: 1.1')
     args = get_args()
-    AVAS(args.env, args.skip_notify).start()
+    AVAS(args.env, args.skip_notify, args.manual_otp, args.interval).start()
