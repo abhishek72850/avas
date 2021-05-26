@@ -94,10 +94,12 @@ To use this script follow the below steps:
 9. Run this command to exceute scheduler:
     (Note: If you don't have Twilio API keys, give the `-skip_notify` value `True`)
     ```
-    python avas.py -env prod.env -skip_notify False
+    python avas.py -env prod.env -skip_notify False -manual_otp False -interval 30
     ```
     - `-env`: Provide the environment file
     - `-skip_notify`: Specifies when to send vaccine availability sms or not
+    - `-manual_otp`: To enter OTP manually provide True
+    - `-interval`: To adjust time interval between each checks default is 30 seconds
 
 [contributors-shield]: https://img.shields.io/github/contributors/abhishek72850/avas.svg?style=for-the-badge
 [contributors-url]: https://github.com/abhishek72850/avas/graphs/contributors
