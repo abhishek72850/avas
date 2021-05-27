@@ -286,7 +286,7 @@ class AVAS(Utitlity):
 
         if (txn_id):
             otp = None
-            if (self.manual_otp):
+            if (not self.manual_otp):
                 # Check for SMS upto 200 sec
                 for i in range(200):
                     messages = self.get_sms_history(self.service)
