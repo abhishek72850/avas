@@ -467,7 +467,10 @@ class AVAS(Utitlity):
 
                 if (data is not None):
                     availabilities = self.extract_availabilities(data, user)
-                    print('Found availabilities: {}'.format(len(availabilities)))
+                    if (user['search_by'] == 'pincode'):
+                        print('Found availabilities for age {} at pincode-{}: {}'.format(user['min_age'], user['pincode'], len(availabilities)))
+                    else:
+                        print('Found availabilities for age {} at district ID-{}: {}'.format(user['min_age'], user['district_id'], len(availabilities)))
 
                     if (len(availabilities) > 0):
                         if (not self.skip_notify):
