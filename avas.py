@@ -162,6 +162,8 @@ class AVAS(Utitlity):
 
         headers = {
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:86.0) Gecko/20100101 Firefox/86.0',
+            'Origin': 'https://selfregistration.cowin.gov.in',
+            'Referer': 'https://selfregistration.cowin.gov.in/'
         }
 
         response = requests.request("POST", self.config['COWIN_GENERATE_OTP_API'], headers=headers, data=json.dumps(payload))
@@ -183,6 +185,8 @@ class AVAS(Utitlity):
 
         headers = {
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:86.0) Gecko/20100101 Firefox/86.0',
+            'Origin': 'https://selfregistration.cowin.gov.in',
+            'Referer': 'https://selfregistration.cowin.gov.in/'
         }
 
         response = requests.request("POST", self.config['COWIN_VERIFY_OTP_API'], headers=headers, data=json.dumps(payload))
@@ -199,6 +203,8 @@ class AVAS(Utitlity):
 
         headers = {
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:86.0) Gecko/20100101 Firefox/86.0',
+            'Origin': 'https://selfregistration.cowin.gov.in',
+            'Referer': 'https://selfregistration.cowin.gov.in/'
         }
 
         todays_date = datetime.now().strftime("%d-%m-%Y")
@@ -222,6 +228,8 @@ class AVAS(Utitlity):
 
         headers = {
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:86.0) Gecko/20100101 Firefox/86.0',
+            'Origin': 'https://selfregistration.cowin.gov.in',
+            'Referer': 'https://selfregistration.cowin.gov.in/',
             'Authorization': 'Bearer {}'.format(self.cowin_token)
         }
 
@@ -239,6 +247,8 @@ class AVAS(Utitlity):
 
         headers = {
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:86.0) Gecko/20100101 Firefox/86.0',
+            'Origin': 'https://selfregistration.cowin.gov.in',
+            'Referer': 'https://selfregistration.cowin.gov.in/',
             'Authorization': 'Bearer {}'.format(self.cowin_token)
         }
 
@@ -265,6 +275,8 @@ class AVAS(Utitlity):
 
         headers = {
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:86.0) Gecko/20100101 Firefox/86.0',
+            'Origin': 'https://selfregistration.cowin.gov.in',
+            'Referer': 'https://selfregistration.cowin.gov.in/',
             'Authorization': 'Bearer {}'.format(self.cowin_token)
         }
 
