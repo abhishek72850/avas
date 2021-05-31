@@ -144,7 +144,7 @@ class AVAS(Utitlity):
             index = re.findall('M(\d+)',encoded_string)[0]
             encoded_string = re.findall("([A-Z])", encoded_string)
             encoded_string = "".join(encoded_string)
-            captcha[int(index)] =  self.config['CAPTCHA_MODEL'].get(encoded_string)
+            captcha[int(index)] =  model.get(encoded_string)
 
         captcha = sorted(captcha.items())
         captcha_text = ''
