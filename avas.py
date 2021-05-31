@@ -30,6 +30,8 @@ from sys import exit
 
 import jwt
 
+from fake_useragent import UserAgent
+
 from prettytable import PrettyTable
 
 from dotenv import dotenv_values
@@ -92,6 +94,7 @@ class AVAS(Utitlity):
         self.skip_notify = skip_notify
         self.manual_otp = manual_otp
         self.interval = interval
+        self.user_agent = UserAgent()
         self.cowin_token = None
         self.config = dotenv_values(env)
         self.load_records_json()
@@ -163,7 +166,7 @@ class AVAS(Utitlity):
         }
 
         headers = {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:86.0) Gecko/20100101 Firefox/86.0',
+            'User-Agent': self.user_agent.random,
             'Origin': 'https://selfregistration.cowin.gov.in',
             'Referer': 'https://selfregistration.cowin.gov.in/'
         }
@@ -186,7 +189,7 @@ class AVAS(Utitlity):
         }
 
         headers = {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:86.0) Gecko/20100101 Firefox/86.0',
+            'User-Agent': self.user_agent.random,
             'Origin': 'https://selfregistration.cowin.gov.in',
             'Referer': 'https://selfregistration.cowin.gov.in/'
         }
@@ -204,7 +207,7 @@ class AVAS(Utitlity):
         payload = {}
 
         headers = {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:86.0) Gecko/20100101 Firefox/86.0',
+            'User-Agent': self.user_agent.random,
             'Origin': 'https://selfregistration.cowin.gov.in',
             'Referer': 'https://selfregistration.cowin.gov.in/'
         }
@@ -229,7 +232,7 @@ class AVAS(Utitlity):
         payload = {}
 
         headers = {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:86.0) Gecko/20100101 Firefox/86.0',
+            'User-Agent': self.user_agent.random,
             'Origin': 'https://selfregistration.cowin.gov.in',
             'Referer': 'https://selfregistration.cowin.gov.in/',
             'Authorization': 'Bearer {}'.format(self.cowin_token)
@@ -248,7 +251,7 @@ class AVAS(Utitlity):
         payload = {}
 
         headers = {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:86.0) Gecko/20100101 Firefox/86.0',
+            'User-Agent': self.user_agent.random,
             'Origin': 'https://selfregistration.cowin.gov.in',
             'Referer': 'https://selfregistration.cowin.gov.in/',
             'Authorization': 'Bearer {}'.format(self.cowin_token)
@@ -276,7 +279,7 @@ class AVAS(Utitlity):
         }
 
         headers = {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:86.0) Gecko/20100101 Firefox/86.0',
+            'User-Agent': self.user_agent.random,
             'Origin': 'https://selfregistration.cowin.gov.in',
             'Referer': 'https://selfregistration.cowin.gov.in/',
             'Authorization': 'Bearer {}'.format(self.cowin_token)
