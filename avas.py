@@ -352,7 +352,8 @@ class AVAS(Utitlity):
 
                 for center in availability:
                     if (user['dose'] == 1 and center['available_capacity_dose1'] > 0) or (user['dose'] == 2 and center['available_capacity_dose2'] > 0):
-                        response = self.schedule_appointment(center['center_id'], center['session_id'], beneficiary["beneficiary_reference_id"], center['slots'][1], captcha_text, user['dose'])
+                        slot = center['slots'][1] if len(center['slots']) > 1 else '11:00AM-01:00PM' 
+                        response = self.schedule_appointment(center['center_id'], center['session_id'], beneficiary["beneficiary_reference_id"], slot, captcha_text, user['dose'])
                         if (response):
                             if (user['beneficiary_reference_id'] not in self.registered_records.keys()):
                                 self.registered_records[user['beneficiary_reference_id']] = {}
