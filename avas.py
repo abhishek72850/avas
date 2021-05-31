@@ -136,7 +136,7 @@ class AVAS(Utitlity):
     def solve_captcha(self, captcha_svg):
         soup = BeautifulSoup(captcha_svg,'html.parser')
 
-        model = json.loads(base64.b64decode(model.encode('ascii')))
+        model = json.loads(base64.b64decode(self.config['CAPTCHA_MODEL'].encode('ascii')))
         captcha = {}
 
         for path in soup.find_all('path',{'fill' : re.compile("#")}):
