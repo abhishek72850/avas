@@ -30,6 +30,8 @@ from sys import exit
 
 import jwt
 
+from prettytable import PrettyTable
+
 from dotenv import dotenv_values
 
 from bs4 import BeautifulSoup
@@ -380,6 +382,14 @@ class AVAS(Utitlity):
 
         return availabilities
     
+    def display_availabilities(self, availabilities):
+        table = PrettyTable()
+        table.field_names = ["Center Name", "District", "Date", "Fees", "Dose 1", "Dose 2", "Vaccine"]
+        
+        for availability in availabilities:
+            table.add_row([availability['name'], availability['district_name'], availability['date'], availability['fee_type'], availability['available_capacity_dose1'], availability['available_capacity_dose2'], availability['vaccine']])
+        print(table)
+    
     def get_availability_text(self, availabilities):
         availability_text = ''
         template = '\nCenter Name:{},\n Address:{},\n Fee Type:{},\n Available Dose 1:{},\n Available Dose 2:{},\n Date:{},\n Vaccine:{},\n Min Age:{}\n\n'
@@ -473,6 +483,8 @@ class AVAS(Utitlity):
                         print('Found availabilities for age {} at district ID-{}: {}'.format(user['min_age'], user['district_id'], len(availabilities)))
 
                     if (len(availabilities) > 0):
+                        self.display_availabilities(availabilities)
+                        
                         if (not self.skip_notify):
                             filtered_availabilities = self.filter_sent_availability(user, availabilities)
 
